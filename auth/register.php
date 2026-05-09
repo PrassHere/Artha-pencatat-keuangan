@@ -6,6 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <form action="register.php" method="post">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <button type="submit">Register</button>
+    </form>
 </body>
 </html>
