@@ -1,0 +1,231 @@
+:root {
+  --gold: #c9a227;
+  --gold-dark: #a8841f;
+  --gold-light: #fdf6e3;
+  --gold-border: #e8d08a;
+  --cream: #f8f5ee;
+  --cream-line: #f0ead8;
+  --dark: #1a1a1a;
+  --dark-2: #111111;
+  --text: #2a2a2a;
+  --muted: #666666;
+  --subtle: #888888;
+  --white: #ffffff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:var(--cream);
+}
+
+.dashboard-layout{
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:260px;
+    background:var(--white);
+    border-right:1px solid var(--cream-line);
+
+    padding:25px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.logo{
+    margin-bottom:50px;
+}
+
+.logo h2{
+    color:var(--gold-dark);
+    font-size:28px;
+}
+
+.logo span{
+    color:var(--subtle);
+    font-size:13px;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.menu-item{
+    text-decoration:none;
+    color:var(--text);
+
+    padding:14px 16px;
+
+    border-radius:12px;
+
+    transition:0.3s;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.menu-item:hover{
+    background:var(--gold-light);
+}
+
+.menu-item.active{
+    background:var(--gold);
+    color:white;
+}
+
+.add-btn{
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+    border-radius:12px;
+
+    background:var(--dark);
+    color:white;
+
+    cursor:pointer;
+
+    margin-bottom:15px;
+
+    transition:0.3s;
+}
+
+.add-btn:hover{
+    background:var(--dark-2);
+}
+
+.logout-btn{
+    display:block;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    background:#f5f5f5;
+
+    color:var(--muted);
+}
+
+/* MAIN CONTENT */
+
+.main-content{
+    flex:1;
+    padding:30px;
+}
+
+/* NAVBAR */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:30px;
+}
+
+.search-box input{
+    width:320px;
+
+    padding:14px 16px;
+
+    border:none;
+    border-radius:12px;
+
+    background:white;
+
+    outline:none;
+}
+
+.navbar-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.notif-btn{
+    width:45px;
+    height:45px;
+
+    border:none;
+    border-radius:12px;
+
+    background:white;
+
+    cursor:pointer;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative; /* WAJIB ADA: Agar dropdown menjadikannya patokan posisi */
+}
+
+.profile-dropdown {
+    display: none; /* Tetap tersembunyi jika tidak ada class .show */
+    position: absolute; /* WAJIB ADA: Membuat kotak melayang tanpa merusak teks lain */
+    
+    /* Atur letak melayangnya tepat di bawah profil */
+    right: 0;
+    top: 100%; /* Otomatis melayang tepat di bawah elemen .profile */
+    margin-top: 10px; /* Jarak renggang antara profil dan kotak dropdown */
+    
+    /* Desain Kotak */
+    background: white;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 12px;
+    z-index: 999; /* Agar kotak berada di lapisan paling atas */
+}
+
+/* Class pembantu untuk memunculkan dropdown via JS */
+.profile-dropdown.show {
+    display: block !important;
+}
+    
+/* CONTENT */
+
+.dashboard-content{
+    margin-top:20px;
+}
+
+.welcome-box{
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+}
+
+.welcome-box h1{
+    font-size:36px;
+    margin-bottom:10px;
+
+    color:var(--dark);
+}
+
+.welcome-box p{
+    color:var(--muted);
+
+    line-height:1.6;
+}

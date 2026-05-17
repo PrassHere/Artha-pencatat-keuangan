@@ -18,8 +18,8 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#about">About us</a></li>
-                    <li><a href="Artha/login.php" class="btn">Login</a></li>
-                    <li><a href="Artha/register.php" class="btn">Get Started</a></li>
+                    <li><a href="auth/login.php" class="btn">Login</a></li>
+                    <li><a href="auth/register.php" class="btn">Get Started</a></li>    
                 </ul>
             </div>
         </nav>
@@ -29,7 +29,6 @@
         <div class="container">
             <h1>Welcome to Artha</h1>
             <p>Your financial companion for a better future.</p>
-            <br>
             <p>Take control of your Money!.</p>
             <p>Track your expenses and manage your budget effectively.</p>
             <a href="auth/register.php" class="btn">Start Tracking</a>
@@ -90,5 +89,6 @@
             <a href="#"><img src="assets/images/twitter.png" alt="Twitter"></a>
             <a href="#"><img src="assets/images/instagram.png" alt="Instagram"></a>
      </footer>
+        
 </body>
 </html>

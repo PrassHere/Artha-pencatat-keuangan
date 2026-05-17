@@ -95,9 +95,9 @@ nav ul li a:hover {
   border-bottom-color: var(--gold);
 }
 
-/* ============================================================
+/* 
    BUTTON
-   ============================================================ */
+    */
 .btn {
   display: inline-block;
   padding: 9px 22px;
@@ -138,9 +138,9 @@ nav ul li a:hover {
   background-color: var(--gold-light);
 }
 
-/* ============================================================
+/* 
    SECTION LABELS (eyebrow text)
-   ============================================================ */
+    */
 .section-label {
   display: inline-block;
   font-size: 11px;
@@ -151,9 +151,9 @@ nav ul li a:hover {
   margin-bottom: 10px;
 }
 
-/* ============================================================
+/* 
    HERO
-   ============================================================ */
+    */
 .hero-section {
   min-height: 90vh;
   display: flex;
@@ -203,9 +203,9 @@ nav ul li a:hover {
   flex-wrap: wrap;
 }
 
-/* ============================================================
+/* 
    DIVIDER
-   ============================================================ */
+    */
 .divider {
   display: flex;
   align-items: center;
@@ -227,9 +227,9 @@ nav ul li a:hover {
   text-transform: uppercase;
 }
 
-/* ============================================================
+/* 
    FEATURES
-   ============================================================ */
+    */
 .features {
   padding: 60px 0;
   background-color: #ffffff;
@@ -288,9 +288,9 @@ nav ul li a:hover {
   line-height: 1.65;
 }
 
-/* ============================================================
+/* 
    PREVIEW
-   ============================================================ */
+    */
 .preview {
   padding: 60px 0;
   text-align: center;
@@ -312,9 +312,9 @@ nav ul li a:hover {
   border: 1px solid var(--gold-border);
 }
 
-/* ============================================================
+/* 
    ABOUT
-   ============================================================ */
+    */
 .about {
   padding: 60px 0;
 }
@@ -358,9 +358,9 @@ nav ul li a:hover {
   margin-top: 2px;
 }
 
-/* ============================================================
+/* 
    CTA
-   ============================================================ */
+    */
 .cta {
   padding: 70px 20px;
   text-align: center;
@@ -396,9 +396,9 @@ nav ul li a:hover {
   background-color: var(--gold-dark);
 }
 
-/* ============================================================
+/* 
    FOOTER
-   ============================================================ */
+    */
 .footer {
   background-color: var(--dark-2);
   color: #ffffff;
@@ -450,31 +450,3 @@ nav ul li a:hover {
   filter: brightness(0.6);
 }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 768px) {
-  nav {
-    padding: 18px 24px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  nav ul {
-    gap: 16px;
-  }
-
-  .hero-section h1 {
-    font-size: 30px;
-  }
-
-  .about .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .footer {
-    flex-direction: column;
-    text-align: center;
-    padding: 20px 24px;
-  }
-}
