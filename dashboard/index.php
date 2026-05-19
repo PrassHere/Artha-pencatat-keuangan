@@ -34,12 +34,14 @@ if (!isset($_SESSION['user_id'])) {
         <!-- CONTENT -->
         <section class="dashboard-content">
 
-            <div class="welcome-box">
-                <h1>Financial Dashboard</h1>
-                <p>
-                    Monitor your transactions, income, expenses,
-                    and financial insights in one place.
-                </p>
+            <?php include "partials/dashboard_cards.php"; ?>
+
+            <div class="dashboard-grid">
+
+                <?php include "partials/dashboard_recent.php"; ?>
+
+                <?php include "partials/dashboard_summary.php"; ?>
+
             </div>
 
         </section>
