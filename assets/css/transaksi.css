@@ -21,19 +21,6 @@
     color:var(--muted);
 }
 
-.export-btn{
-    padding:14px 20px;
-
-    border:none;
-    border-radius:12px;
-
-    background:var(--gold);
-
-    color:white;
-
-    cursor:pointer;
-}
-
 .filters-box{
     display:flex;
     gap:15px;

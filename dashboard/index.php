@@ -47,8 +47,12 @@ if (!isset($_SESSION['user_id'])) {
     </main>
 
 </div>
-   
+
+<?php include"partials/modal_tambah.php"; ?>
+
+    <script src="../assets/js/modal.js"></script>
     <script src="../assets/js/sidebar.js"></script>
     <script src="../assets/js/navbar.js"></script>
+
 </body>
 </html>

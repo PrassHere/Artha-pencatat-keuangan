@@ -12,6 +12,8 @@
     </div>
 
     <div class="sidebar-bottom">
-        <button class="add-btn">+ Add Transaction</button>
+        <button class="openModal add-btn">
+            + Add Transaction
+        </button>
     </div>
 </aside>

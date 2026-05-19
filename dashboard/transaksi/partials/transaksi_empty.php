@@ -11,8 +11,9 @@
         by adding your first transaction.
     </p>
 
-    <button class="add-transaction-btn">
+    <button class="openModal empty-btn">
         + Add Transaction
     </button>
 
 </div>
+

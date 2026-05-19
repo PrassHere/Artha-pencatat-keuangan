@@ -40,10 +40,6 @@ if (!isset($_SESSION['user_id'])) {
                     </p>
                 </div>
 
-                <button class="export-btn">
-                    Export CSV
-                </button>
-
             </div>
 
 
@@ -67,7 +63,10 @@ if (!isset($_SESSION['user_id'])) {
 
     </main>
 
+<?php include "../partials/modal_tambah.php"; ?>
+
 </div>
+<script src="../../assets/js/modal.js"></script>
 <script src="../../assets/js/sidebar.js"></script>
 <script src="../../assets/js/navbar.js"></script>
 </body>

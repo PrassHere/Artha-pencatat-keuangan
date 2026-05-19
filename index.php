@@ -34,25 +34,31 @@
             <a href="auth/register.php" class="btn">Start Tracking</a>
         </div>
     </section>
-
+ 
     <section class="features" id="features">
         <div class="container">
             <h2>Features</h2>
-            <div class="feature-item">
-                <h3>Expense Tracking</h3>
-                <p>Track your expenses and manage your budget effectively.</p>
-            </div>
-            <div class="feature-item">
-                <h3>Financial Categories</h3>
-                <p>Organize your expenses into meaningful categories for better insights.</p>
-            </div>
-            <div class="feature-item">
-                <h3>Dashboard Overview</h3>
-                <p>Get a clear summary of your balance, income, and expenses in one place.</p>
-            </div>
-            <div class="feature-item">
-                <h3>Transaction History</h3>
-                <p>View and manage all your financial transactions in one convenient location.</p>
+
+            <div class="feature-grid">
+               <div class="feature-item">
+                    <h3>Expense Tracking</h3>
+                 <p>Track your expenses and manage your budget effectively.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Financial Categories</h3>
+                    <p>Organize your expenses into meaningful categories.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Dashboard Overview</h3>
+                    <p>Get a clear summary of your balance.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Transaction History</h3>
+                    <p>View and manage all transactions.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -79,7 +85,7 @@
         </div>
     </section>
 
-     <footer class="footer">
+    <footer class="footer">
         <div class="container">
             <p>&copy; 2026 Artha. All rights reserved.</p>
         </div>
@@ -88,7 +94,8 @@
             <a href="#"><img src="assets/images/facebook.png" alt="Facebook"></a>
             <a href="#"><img src="assets/images/twitter.png" alt="Twitter"></a>
             <a href="#"><img src="assets/images/instagram.png" alt="Instagram"></a>
-     </footer>
+        </div>
+    </footer>
         
 </body>
 </html>

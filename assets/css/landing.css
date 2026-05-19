@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 :root {
   --gold: #c9a227;
   --gold-dark: #a8841f;
@@ -118,39 +123,6 @@ nav ul li a:hover {
   transform: translateY(-1px);
 }
 
-.btn-outline {
-  display: inline-block;
-  padding: 9px 22px;
-  background-color: transparent;
-  color: var(--gold);
-  border: 1px solid var(--gold);
-  border-radius: var(--radius-sm);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  transition:
-    background-color var(--transition),
-    color var(--transition);
-}
-
-.btn-outline:hover {
-  background-color: var(--gold-light);
-}
-
-/* 
-   SECTION LABELS (eyebrow text)
-    */
-.section-label {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
 /* 
    HERO
     */
@@ -163,20 +135,6 @@ nav ul li a:hover {
   padding: 80px 20px;
   background-color: var(--cream);
   border-bottom: 1px solid var(--cream-line);
-}
-
-.hero-section .hero-tag {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  color: var(--gold);
-  text-transform: uppercase;
-  padding: 5px 16px;
-  border: 1px solid var(--gold-border);
-  border-radius: 20px;
-  background: var(--gold-light);
-  margin-bottom: 20px;
 }
 
 .hero-section h1 {
@@ -196,37 +154,6 @@ nav ul li a:hover {
   margin: 0 auto 28px;
 }
 
-.hero-section .hero-actions {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* 
-   DIVIDER
-    */
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 0 50px;
-  margin: 44px 0 0;
-}
-
-.divider-line {
-  flex: 1;
-  height: 1px;
-  background-color: var(--cream-line);
-}
-
-.divider-text {
-  font-size: 11px;
-  color: #bbb;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 /* 
    FEATURES
     */
@@ -235,15 +162,16 @@ nav ul li a:hover {
   background-color: #ffffff;
 }
 
-.features > .container > h2 {
+.features h2 {
   font-size: 28px;
   color: var(--dark);
   margin-bottom: 36px;
+  text-align: center;
 }
 
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 20px;
 }
 
@@ -255,22 +183,12 @@ nav ul li a:hover {
   transition:
     border-color var(--transition),
     transform var(--transition);
+  height: 100%;
 }
 
 .feature-item:hover {
   border-color: var(--gold);
   transform: translateY(-2px);
-}
-
-.feature-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-md);
-  background-color: #fdf3d1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 14px;
 }
 
 .feature-item h3 {
@@ -288,9 +206,7 @@ nav ul li a:hover {
   line-height: 1.65;
 }
 
-/* 
-   PREVIEW
-    */
+/* PREVIEW */
 .preview {
   padding: 60px 0;
   text-align: center;
@@ -312,24 +228,16 @@ nav ul li a:hover {
   border: 1px solid var(--gold-border);
 }
 
-/* 
-   ABOUT
-    */
+/* ABOUT */
 .about {
   padding: 60px 0;
-}
-
-.about .about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: center;
 }
 
 .about h2 {
   font-size: 28px;
   color: var(--dark);
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .about p {
@@ -337,30 +245,11 @@ nav ul li a:hover {
   color: var(--muted);
   line-height: 1.8;
   margin-bottom: 12px;
+  text-align: center;
 }
 
-.stat-row {
-  display: flex;
-  gap: 28px;
-  margin-top: 24px;
-}
 
-.stat-num {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: 30px;
-  font-weight: 600;
-  color: var(--gold);
-}
-
-.stat-label {
-  font-size: 12px;
-  color: #999;
-  margin-top: 2px;
-}
-
-/* 
-   CTA
-    */
+/* CTA */
 .cta {
   padding: 70px 20px;
   text-align: center;
@@ -368,23 +257,10 @@ nav ul li a:hover {
   color: #ffffff;
 }
 
-.cta .section-label {
-  color: var(--gold);
-}
-
 .cta h2 {
   font-size: 30px;
   color: #ffffff;
   margin: 10px 0 14px;
-}
-
-.cta p {
-  font-size: 14px;
-  color: #888;
-  margin-bottom: 28px;
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .cta .btn {
@@ -396,9 +272,7 @@ nav ul li a:hover {
   background-color: var(--gold-dark);
 }
 
-/* 
-   FOOTER
-    */
+/* FOOTER */
 .footer {
   background-color: var(--dark-2);
   color: #ffffff;
@@ -409,13 +283,6 @@ nav ul li a:hover {
   border-top: 1px solid #222;
   flex-wrap: wrap;
   gap: 12px;
-}
-
-.footer .footer-logo {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: 15px;
-  color: var(--gold);
-  font-weight: 500;
 }
 
 .footer p {
