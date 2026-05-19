@@ -59,6 +59,11 @@
                     <h3>Transaction History</h3>
                     <p>View and manage all transactions.</p>
                 </div>
+
+                <div class="feature-item">
+                    <h3>Financial Insights</h3>
+                    <p>Gain insights into your spending habits.</p>
+                </div>
             </div>
         </div>
     </section>
