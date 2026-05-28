@@ -1,3 +1,9 @@
+<?php
+if (!isset($_SESSION['id_user'])) {
+    header("Location: ../../../auth/login.php");
+    exit;
+}
+?>
 <div class="empty-state">
 
     <div class="empty-icon">

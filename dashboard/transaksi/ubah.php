@@ -1,19 +1,23 @@
 <?php
+session_start();
+require '../../functions.php';
 if (!isset($_SESSION['id_user'])) {
-    header("Location: ../../auth/login.php");
+    header("Location: ../auth/login.php");
     exit;
 }
-if (isset($_POST['tambah_transaksi'])) {
+$id_transaksi = $_GET['id'];
+$isi = query("SELECT * FROM transaksi WHERE id_transaksi = '$id_transaksi'")[0];
+if (isset($_POST['ubah_transaksi'])) {
     
-    if (tambah($_POST) > 0) {
+    if (ubah($_POST) > 0) {
         echo "
         <script>
-            alert('Transaksi berhasil ditambahkan!');
+            alert('Transaksi berhasil diubah!');
             document.location.href = 'index.php'; 
         </script>
         ";
     } else {
-        echo "<script>alert('Gagal menambahkan transaksi!');</script>";
+        echo "<script>alert('Gagal mengubah transaksi!');</script>";
     }
 }
 
@@ -25,7 +29,7 @@ if (isset($_POST['tambah_transaksi'])) {
         <!-- HEADER -->
         <div class="modal-header">
 
-            <h2>Add Transaction</h2>
+            <h2>Edit Transaction</h2>
 
             <button id="closeModal" class="close-btn">
                 ✕
@@ -36,8 +40,9 @@ if (isset($_POST['tambah_transaksi'])) {
         <!-- FORM -->
         <form class="transaction-form" method="post" action="">
 
-        <!-- untuk input jenis -->
-        <input type="hidden" name="jenis" id="input_jenis" value="expense">
+        <!-- untuk input jenis dan id -->        
+        <input type="hidden" name="id_transaksi" value="<?= $isi['id_transaksi'];?>">
+        <input type="hidden" name="jenis_transaksi" id="input_jenis" value="<?= $isi['jenis_transaksi']; ?>">
             <!-- TYPE -->
             <div class="form-group">
 
@@ -47,7 +52,7 @@ if (isset($_POST['tambah_transaksi'])) {
 
                     <button 
                         type="button"
-                        class="type-btn expense active"
+                        class="type-btn expense <?= ($isi['jenis_transaksi'] == 'expense') ? 'active' : ''; ?>"
                         onclick="setJenis('expense', this)"
                     >
                         ↗ Expense
@@ -55,7 +60,7 @@ if (isset($_POST['tambah_transaksi'])) {
 
                     <button 
                         type="button"
-                        class="type-btn income"
+                        class="type-btn income <?= ($isi['jenis_transaksi'] == 'income') ? 'active' : ''; ?>"
                         onclick="setJenis('income', this)"
                     >
                         ↙ Income
@@ -78,6 +83,7 @@ if (isset($_POST['tambah_transaksi'])) {
                         type="number"
                         placeholder="0"
                         name="nominal"
+                        value="<?= $isi['nominal']; ?>"
                         required
                     >
 
@@ -94,11 +100,11 @@ if (isset($_POST['tambah_transaksi'])) {
 
                     <select name="kategori">
 
-                        <option value="food">Food</option>
-                        <option value="transport">Transport</option>
-                        <option value="shopping">Shopping</option>
-                        <option value="salary">Salary</option>
-                        <option value="etc">etc</option>
+                        <option value="food" <?= ($isi['kategori'] == 'food') ? 'selected' : ''; ?>>Food</option>
+                        <option value="transport" <?= ($isi['kategori'] == 'transport') ? 'selected' : ''; ?>>Transport</option>
+                        <option value="shopping" <?= ($isi['kategori'] == 'shopping') ? 'selected' : ''; ?>>Shopping</option>
+                        <option value="salary" <?= ($isi['kategori'] == 'salary') ? 'selected' : ''; ?>>Salary</option>
+                        <option value="etc" <?= ($isi['kategori'] == 'etc') ? 'selected' : ''; ?>>etc</option>
 
                     </select>
 
@@ -108,7 +114,7 @@ if (isset($_POST['tambah_transaksi'])) {
 
                     <label>Date</label>
 
-                    <input type="date" name="tanggal" required>
+                    <input type="date" name="tanggal" required value="<?= $isi['tanggal']; ?>">
 
                 </div>
 
@@ -121,7 +127,7 @@ if (isset($_POST['tambah_transaksi'])) {
 
                 <textarea 
                     placeholder="What was this transaction for?" name="catatan"
-                ></textarea>
+                ><?= $isi['catatan']; ?></textarea>
 
             </div>
 
@@ -132,6 +138,7 @@ if (isset($_POST['tambah_transaksi'])) {
                     type="button"
                     class="cancel-btn"
                     id="cancelModal"
+                    onclick="window.location.href='index.php'"
                 >
                     Cancel
                 </button>
@@ -139,9 +146,9 @@ if (isset($_POST['tambah_transaksi'])) {
                 <button 
                     type="submit"
                     class="submit-btn"
-                    name="tambah_transaksi"
+                    name="ubah_transaksi"
                 >
-                    Save Transaction
+                     Save Changes
                 </button>
 
             </div>

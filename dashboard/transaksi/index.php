@@ -1,11 +1,14 @@
 <?php
 session_start();
+require '../../functions.php';
 
-// Jika user belum login, tendang balik ke form login
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['id_user'])) {
     header("Location: ../../auth/login.php");
     exit;
 }
+$id_user = $_SESSION['id_user'];
+$query_transaksi = mysqli_query($conn, "SELECT * FROM transaksi WHERE id_user = '$id_user' ORDER BY tanggal DESC");
+$jumlah_data = mysqli_num_rows($query_transaksi);
 ?>
 
 
@@ -50,7 +53,7 @@ if (!isset($_SESSION['user_id'])) {
             <?php include  "partials/transaksi_filters.php"; ?>
 
             <?php
-                $hasData = false;
+                $hasData = ($jumlah_data > 0);
 
                 if($hasData){
                     include  "partials/transaksi_table.php";

@@ -1,8 +1,8 @@
 <?php
 session_start();
-
+require '../functions.php';
 // Jika user belum memicu session lewat login.php, tendang balik ke form login
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['id_user'])) {
     header("Location: ../auth/login.php");
     exit;
 }

@@ -1,9 +1,33 @@
 <?php
 session_start();
 
-if(isset($_SESSION['user'])){
+require '../functions.php';
+
+if(isset($_SESSION['id_user'])){
     header("Location: ../dashboard/index.php");
     exit;
+}
+
+if(isset($_POST['register'])){
+
+    if(registrasi($_POST) > 0) {
+        $email_pendaftar = mysqli_real_escape_string($conn, trim($_POST['email']));
+        $result = mysqli_query($conn, "SELECT id, username FROM user WHERE email = '$email_pendaftar'");
+        $user_baru = mysqli_fetch_assoc($result);
+
+        $_SESSION['id_user'] = $user_baru['id'];
+        $_SESSION['username'] = $user_baru['username'];
+
+        echo "
+        <script>
+            alert('Registrasi Berhasil! Selamat Datang.');
+            document.location.href = '../dashboard/index.php';
+        </script>
+        ";
+       
+    } else {
+        echo mysqli_error( $conn );
+    }
 }
 ?>
 
@@ -38,7 +62,7 @@ if(isset($_SESSION['user'])){
         <h2>Create Account</h2>
         <p>Start your financial journey with Artha</p>
 
-        <form action="process_register.php" method="POST">
+        <form action="" method="POST">
 
             <div class="input-group">
                 <label>Username</label>
@@ -55,7 +79,7 @@ if(isset($_SESSION['user'])){
                 <input type="password" name="password" required>
             </div>
 
-            <button type="submit" class="btn-auth">
+            <button type="submit" class="btn-auth" name="register">
                 Register
             </button>
 
