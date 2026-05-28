@@ -63,6 +63,10 @@ $percentage_rounded = round($percentage, 1);
 
     <div class="stats-card income-card">
 
+        <div class="card-icon income-icon">
+            ↗
+        </div>
+
         <span>Total Income</span>
 
         <h2>Rp <?= number_format($total_income, 0, ',', '.'); ?></h2>
@@ -71,6 +75,10 @@ $percentage_rounded = round($percentage, 1);
 
     <div class="stats-card expense-card">
 
+        <div class="card-icon expense-icon">
+            ↘
+        </div>
+        
         <span>Total Expense</span>
 
         <h2>Rp <?= number_format($total_expense, 0, ',', '.'); ?></h2>

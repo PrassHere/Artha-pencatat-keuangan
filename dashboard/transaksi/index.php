@@ -67,7 +67,7 @@ $jumlah_data = mysqli_num_rows($query_transaksi);
     </main>
 
 <?php include "../partials/modal_tambah.php"; ?>
-
+ 
 </div>
 <script src="../../assets/js/modal.js"></script>
 <script src="../../assets/js/sidebar.js"></script>

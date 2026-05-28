@@ -4,7 +4,7 @@ if (!isset($_SESSION['id_user'])) {
     exit;
 }
 $id_user  = $_SESSION['id_user'];
-$query_tampilan = mysqli_query($conn, "SELECT * FROM transaksi WHERE id_user = '$id_user' ORDER BY tanggal DESC LIMIT 5");
+$query_tampilan = mysqli_query($conn, "SELECT * FROM transaksi WHERE id_user = '$id_user' ORDER BY tanggal DESC,id_transaksi DESC LIMIT 4");
 ?>
 <div class="dashboard-box recent-box">
 

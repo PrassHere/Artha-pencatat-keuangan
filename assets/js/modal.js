@@ -1,76 +1,106 @@
-const modal = document.getElementById("transactionModal");
+document.addEventListener("DOMContentLoaded", () => {
 
-const openButtons = document.querySelectorAll(".openModal");
+    // ======================
+    // OPEN MODAL
+    // ======================
 
-const closeBtn = document.getElementById("closeModal");
+    const openButtons = document.querySelectorAll("[data-modal-target]");
 
-const cancelBtn = document.getElementById("cancelModal");
+    openButtons.forEach(button => {
 
-const modalBox = document.querySelector(".modal-box");
+        button.addEventListener("click", () => {
 
-const form = document.querySelector(".transaction-form");
+            const target = button.dataset.modalTarget;
 
-const typeButtons = document.querySelectorAll(".type-btn");
+            const modal = document.getElementById(target);
 
+            if(modal){
 
-// OPEN MODAL
-openButtons.forEach(button => {
+                modal.classList.add("active");
 
-    button.addEventListener("click", () => {
+            }
 
-        form.reset();
-
-        modal.classList.add("active");
+        });
 
     });
 
-});
 
+    // ======================
+    // CLOSE MODAL
+    // ======================
 
-// CLOSE X
-closeBtn.addEventListener("click", () => {
+    const closeButtons = document.querySelectorAll("[data-close-modal]");
 
-    modal.classList.remove("active");
+    closeButtons.forEach(button => {
 
-    form.reset();
+        button.addEventListener("click", () => {
 
-});
+            const modal = button.closest(".modal-overlay");
 
+            modal.classList.remove("active");
 
-// CANCEL
-cancelBtn.addEventListener("click", () => {
-
-    form.reset();
-
-});
-
-
-// KLIK OVERLAY
-modal.addEventListener("click", () => {
-
-    modal.classList.remove("active");
-
-    form.reset();
-
-});
-
-
-// STOP CLICK DI DALAM MODAL
-modalBox.addEventListener("click", (e) => {
-
-    e.stopPropagation();
-
-});
-
-typeButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        typeButtons.forEach(btn => {
-            btn.classList.remove("active");
         });
 
-        button.classList.add("active");
+    });
+
+
+    // ======================
+    // OVERLAY CLICK
+    // ======================
+
+    const modals = document.querySelectorAll(".modal-overlay");
+
+    modals.forEach(modal => {
+
+        modal.addEventListener("click", () => {
+
+            modal.classList.remove("active");
+
+        });
+
+    });
+
+
+    // ======================
+    // STOP PROPAGATION
+    // ======================
+
+    const modalBoxes = document.querySelectorAll(".modal-box");
+
+    modalBoxes.forEach(box => {
+
+        box.addEventListener("click", (e) => {
+
+            e.stopPropagation();
+
+        });
+
+    });
+
+
+    // ======================
+    // TYPE BUTTON
+    // ======================
+
+    const typeSelectors = document.querySelectorAll(".type-selector");
+
+    typeSelectors.forEach(selector => {
+
+        const buttons = selector.querySelectorAll(".type-btn");
+
+        buttons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                buttons.forEach(btn => {
+                    btn.classList.remove("active");
+                });
+
+                button.classList.add("active");
+
+            });
+
+        });
 
     });
 

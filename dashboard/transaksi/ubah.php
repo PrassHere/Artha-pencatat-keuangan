@@ -1,48 +1,92 @@
+```php
 <?php
 session_start();
 require '../../functions.php';
+
 if (!isset($_SESSION['id_user'])) {
-    header("Location: ../auth/login.php");
+
+    header("Location: ../../auth/login.php");
     exit;
 }
+
 $id_transaksi = $_GET['id'];
-$isi = query("SELECT * FROM transaksi WHERE id_transaksi = '$id_transaksi'")[0];
-if (isset($_POST['ubah_transaksi'])) {
-    
-    if (ubah($_POST) > 0) {
+
+$data = query(
+    "SELECT * FROM transaksi 
+     WHERE id_transaksi = '$id_transaksi'"
+)[0];
+
+if(isset($_POST['ubah_transaksi'])){
+
+    if(ubah($_POST) > 0){
+
         echo "
         <script>
-            alert('Transaksi berhasil diubah!');
-            document.location.href = 'index.php'; 
+            alert('Transaction updated successfully!');
+            document.location.href = 'index.php';
         </script>
         ";
+
     } else {
-        echo "<script>alert('Gagal mengubah transaksi!');</script>";
+
+        echo "
+        <script>
+            alert('Failed to update transaction!');
+        </script>
+        ";
     }
 }
-
 ?>
-<div class="modal-overlay" id="transactionModal">
 
-    <div class="modal-box">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Transaction</title>
+
+    <link rel="stylesheet" href="../../assets/css/edit-transaksi.css">
+
+</head>
+<body>
+
+<div class="edit-overlay">
+
+    <div class="edit-box">
 
         <!-- HEADER -->
-        <div class="modal-header">
+        <div class="edit-header">
 
-            <h2>Edit Transaction</h2>
+            <div>
+                <h1>Edit Transaction</h1>
+                <p>Update your financial activity</p>
+            </div>
 
-            <button id="closeModal" class="close-btn">
+            <a href="index.php" class="close-btn">
                 ✕
-            </button>
+            </a>
 
         </div>
 
         <!-- FORM -->
-        <form class="transaction-form" method="post" action="">
+        <form method="post" class="edit-form">
 
-        <!-- untuk input jenis dan id -->        
-        <input type="hidden" name="id_transaksi" value="<?= $isi['id_transaksi'];?>">
-        <input type="hidden" name="jenis_transaksi" id="input_jenis" value="<?= $isi['jenis_transaksi']; ?>">
+            <input 
+                type="hidden" 
+                name="id_transaksi"
+                value="<?= $data['id_transaksi']; ?>"
+            >
+
+            <input 
+                type="hidden" 
+                name="jenis_transaksi"
+                id="input_jenis"
+                value="<?= $data['jenis_transaksi']; ?>"
+            >
+
             <!-- TYPE -->
             <div class="form-group">
 
@@ -50,20 +94,20 @@ if (isset($_POST['ubah_transaksi'])) {
 
                 <div class="type-selector">
 
-                    <button 
+                    <button
                         type="button"
-                        class="type-btn expense <?= ($isi['jenis_transaksi'] == 'expense') ? 'active' : ''; ?>"
+                        class="type-btn expense <?= ($data['jenis_transaksi'] == 'expense') ? 'active' : ''; ?>"
                         onclick="setJenis('expense', this)"
                     >
-                        ↗ Expense
+                        ↘ Expense
                     </button>
 
-                    <button 
+                    <button
                         type="button"
-                        class="type-btn income <?= ($isi['jenis_transaksi'] == 'income') ? 'active' : ''; ?>"
+                        class="type-btn income <?= ($data['jenis_transaksi'] == 'income') ? 'active' : ''; ?>"
                         onclick="setJenis('income', this)"
                     >
-                        ↙ Income
+                        ↗ Income
                     </button>
 
                 </div>
@@ -79,19 +123,18 @@ if (isset($_POST['ubah_transaksi'])) {
 
                     <span>Rp</span>
 
-                    <input 
+                    <input
                         type="number"
-                        placeholder="0"
                         name="nominal"
-                        value="<?= $isi['nominal']; ?>"
                         required
+                        value="<?= $data['nominal']; ?>"
                     >
 
                 </div>
 
             </div>
 
-            <!-- CATEGORY + DATE -->
+            <!-- ROW -->
             <div class="form-row">
 
                 <div class="form-group">
@@ -100,11 +143,30 @@ if (isset($_POST['ubah_transaksi'])) {
 
                     <select name="kategori">
 
-                        <option value="food" <?= ($isi['kategori'] == 'food') ? 'selected' : ''; ?>>Food</option>
-                        <option value="transport" <?= ($isi['kategori'] == 'transport') ? 'selected' : ''; ?>>Transport</option>
-                        <option value="shopping" <?= ($isi['kategori'] == 'shopping') ? 'selected' : ''; ?>>Shopping</option>
-                        <option value="salary" <?= ($isi['kategori'] == 'salary') ? 'selected' : ''; ?>>Salary</option>
-                        <option value="etc" <?= ($isi['kategori'] == 'etc') ? 'selected' : ''; ?>>etc</option>
+                        <option value="food"
+                        <?= ($data['kategori'] == 'food') ? 'selected' : ''; ?>>
+                            Food
+                        </option>
+
+                        <option value="transport"
+                        <?= ($data['kategori'] == 'transport') ? 'selected' : ''; ?>>
+                            Transport
+                        </option>
+
+                        <option value="shopping"
+                        <?= ($data['kategori'] == 'shopping') ? 'selected' : ''; ?>>
+                            Shopping
+                        </option>
+
+                        <option value="salary"
+                        <?= ($data['kategori'] == 'salary') ? 'selected' : ''; ?>>
+                            Salary
+                        </option>
+
+                        <option value="etc"
+                        <?= ($data['kategori'] == 'etc') ? 'selected' : ''; ?>>
+                            Etc
+                        </option>
 
                     </select>
 
@@ -114,7 +176,12 @@ if (isset($_POST['ubah_transaksi'])) {
 
                     <label>Date</label>
 
-                    <input type="date" name="tanggal" required value="<?= $isi['tanggal']; ?>">
+                    <input
+                        type="date"
+                        name="tanggal"
+                        required
+                        value="<?= $data['tanggal']; ?>"
+                    >
 
                 </div>
 
@@ -125,30 +192,26 @@ if (isset($_POST['ubah_transaksi'])) {
 
                 <label>Description</label>
 
-                <textarea 
-                    placeholder="What was this transaction for?" name="catatan"
-                ><?= $isi['catatan']; ?></textarea>
+                <textarea
+                    name="catatan"
+                    placeholder="Transaction note..."
+                ><?= $data['catatan']; ?></textarea>
 
             </div>
 
             <!-- FOOTER -->
-            <div class="modal-footer">
+            <div class="form-footer">
 
-                <button 
-                    type="button"
-                    class="cancel-btn"
-                    id="cancelModal"
-                    onclick="window.location.href='index.php'"
-                >
+                <a href="index.php" class="cancel-btn">
                     Cancel
-                </button>
+                </a>
 
-                <button 
+                <button
                     type="submit"
-                    class="submit-btn"
                     name="ubah_transaksi"
+                    class="submit-btn"
                 >
-                     Save Changes
+                    Save Changes
                 </button>
 
             </div>
@@ -158,16 +221,24 @@ if (isset($_POST['ubah_transaksi'])) {
     </div>
 
 </div>
+
 <script>
-    function setJenis(jenis, btn) {
-        // 1. Ubah nilai input tersembunyi
-        document.getElementById('input_jenis').value = jenis;
 
-        // 2. Hapus class 'active' dari semua tombol
-        let buttons = document.querySelectorAll('.type-btn');
-        buttons.forEach(b => b.classList.remove('active'));
+function setJenis(jenis, btn){
 
-        // 3. Tambahkan class 'active' ke tombol yang sedang diklik
-        btn.classList.add('active');
-    }
+    document.getElementById("input_jenis").value = jenis;
+
+    const buttons = document.querySelectorAll(".type-btn");
+
+    buttons.forEach(button => {
+        button.classList.remove("active");
+    });
+
+    btn.classList.add("active");
+}
+
 </script>
+
+</body>
+</html>
+```

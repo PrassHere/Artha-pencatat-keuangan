@@ -9,6 +9,7 @@ $result = mysqli_query($conn, "SELECT email FROM user WHERE username = '$usernam
 $ambil_email = mysqli_fetch_assoc($result);
 $email = $ambil_email['email']
 ?>
+
 <div class="navbar">
 
     <!-- SEARCH -->
@@ -31,16 +32,12 @@ $email = $ambil_email['email']
     <!-- NOTIFIKASI & PROFIL -->
     <div class="navbar-right">
 
-        <!-- Tombol Notifikasi -->
-        <button class="notif-btn">
-            <span class="notif-count">3</span>
-            🔔
-        </button>
-
         <!-- Komponen Profil  -->
         <div class="profile" id="profileTrigger" style="cursor: pointer;">
             
-            <div class="profile-img">A</div>
+            <div class="profile-img">
+                 <?= strtoupper(substr($username, 0, 1)); ?>
+            </div>
 
             <div class="profile-info">
                 <h4><?= htmlspecialchars($username); ?> ▾</h4>

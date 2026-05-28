@@ -27,7 +27,7 @@ if (isset($_POST['tambah_transaksi'])) {
 
             <h2>Add Transaction</h2>
 
-            <button id="closeModal" class="close-btn">
+            <button data-close-modal class="close-btn">
                 ✕
             </button>
 
@@ -131,7 +131,7 @@ if (isset($_POST['tambah_transaksi'])) {
                 <button 
                     type="button"
                     class="cancel-btn"
-                    id="cancelModal"
+                    data-close-modal
                 >
                     Cancel
                 </button>

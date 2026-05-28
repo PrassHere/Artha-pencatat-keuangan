@@ -18,7 +18,7 @@ if (!isset($_SESSION['id_user'])) {
     </div>
 
     <div class="sidebar-bottom">
-        <button class="openModal add-btn">
+        <button class="add-btn" data-modal-target="transactionModal">
             + Add Transaction
         </button>
     </div>

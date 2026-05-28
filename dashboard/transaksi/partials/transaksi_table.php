@@ -44,10 +44,14 @@ $jumlahHalaman = ceil($jumlahdata / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET['halaman'])) ? (int)$_GET['halaman'] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
+// ketika ingin membuka filter seperti this month dan lainnya, buat agar pagination nya sesuai dengan filter yang dipilih.
+
+
+
 // ==========================================
 // 3. EKSEKUSI PENARIKAN DATA
 // ==========================================
-$transaksi = query("SELECT * FROM transaksi $kondisi_sql ORDER BY tanggal DESC LIMIT $awalData, $jumlahDataPerHalaman");
+$transaksi = query("SELECT * FROM transaksi $kondisi_sql ORDER BY tanggal DESC,id_transaksi DESC LIMIT $awalData, $jumlahDataPerHalaman");
 
 // ==========================================
 // 4. AMANKAN LINK (Bawa filter saat pindah halaman)
@@ -61,21 +65,21 @@ if (isset($_GET['custom_date'])) $url_params .= "&custom_date=" . urlencode($_GE
 <div class="transaction-table-container">
     <!-- tombol halaman -->
      <?php if($halamanAktif > 1) : ?>
-        <a href="?halaman=<?= $halamanAktif - 1;  ?><?= isset($_GET['keyword']) ? '&keyword=' . $_GET['keyword'] : ''; ?>">&laquo;</a>
+        <a href="?halaman=<?= $halamanAktif - 1;  ?><?= $url_params; ?>">&laquo;</a>
         <?php endif; ?>
         
 
         <?php for( $i = 1; $i <= $jumlahHalaman; $i++ ) : ?>
             <?php if( $i == $halamanAktif) : ?>
-                <a href="?halaman=<?= $i; ?>" style="font-weight: bold; color: yellow;"><?= $i; ?></a>
+                <a href="?halaman=<?= $i; ?><?= $url_params; ?>" style="font-weight: bold; color: yellow;"><?= $i; ?></a>
             <?php else : ?>
-                <a href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+                <a href="?halaman=<?= $i; ?><?= $url_params; ?>"><?= $i; ?></a>
             <?php endif; ?>
             
         <?php endfor; ?>
 
         <?php if ($halamanAktif < $jumlahHalaman) : ?>
-        <a href="?halaman=<?= $halamanAktif + 1;  ?><?= isset($_GET['keyword']) ? '&keyword=' . $_GET['keyword'] : ''; ?>">&raquo;</a>
+        <a href="?halaman=<?= $halamanAktif + 1;  ?><?= $url_params; ?>">&raquo;</a>
         <?php endif; ?>
 
     <table class="transaction-table">
@@ -102,8 +106,8 @@ if (isset($_GET['custom_date'])) $url_params .= "&custom_date=" . urlencode($_GE
             <td><?= $row["jenis_transaksi"]; ?></td>
             <td><?= $row["nominal"]; ?></td>
             <td>
-                <a href="ubah.php?id=<?= $row["id_transaksi"]; ?>" onclick=
-                "return confirm('anda yakin ingin mengubah data?');">ubah</a> |
+                <a href="ubah.php?id=<?= $row["id_transaksi"]; ?>" class ="edit-btn" onclick=
+                "return confirm('anda yakin ingin mengubah data?');" >ubah</a> |
                 <a href="hapus.php?id=<?= $row["id_transaksi"]; ?>" onclick=
                 "return confirm('anda yakin ingin menghapus?');">hapus</a>
             </td>
