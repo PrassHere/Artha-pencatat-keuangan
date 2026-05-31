@@ -22,19 +22,20 @@ if (isset($_POST['login'])) {
             $_SESSION['id_user'] = $row['id'];
             $_SESSION['username'] = $row['username'];
 
-            echo "
-                <script> 
-                alert('Login Berhasil!');
-                document.location.href = '../dashboard/index.php';
-                </script>
-            ";
+            $_SESSION['success'] = 'Login berhasil!';
+
+            header("Location: ../dashboard/index.php");
             exit;
         
         } else {
-            echo "<script>alert('Email atau password salah!');</script>";
+            $_SESSION['error'] = 'Email atau password salah!';
+            header("Location: login.php");
+            exit;
         }
     } else {
-    echo "<script>alert('Email atau password tidak boleh kosong!');</script>";
+        $_SESSION['error'] = 'Email atau password tidak boleh kosong!';
+        header("Location: login.php");
+        exit;
     }
     }
 
@@ -47,6 +48,7 @@ if (isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Artha</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/auth.css">
 </head>
 <body>
@@ -54,19 +56,22 @@ if (isset($_POST['login'])) {
 <div class="auth-container">
 
     <div class="logo">
-        <h1>Artha</h1>
+        <h1><i class="fas fa-piggy-bank"></i> Artha</h1>
     </div>
 
     <div class="auth-card">
 
-
         <a href="../index.php" class="back-link">
-            X
+            <i class="fas fa-times"></i>
         </a>
 
         <div class="switch-auth">
-            <a href="login.php" class="active">Log In</a>
-            <a href="register.php">Sign Up</a>
+            <a href="login.php" class="active">
+                <i class="fas fa-sign-in-alt"></i> Log In
+            </a>
+            <a href="register.php">
+                <i class="fas fa-user-plus"></i> Sign Up
+            </a>
         </div>
 
         <h2>Welcome Back</h2>
@@ -75,17 +80,17 @@ if (isset($_POST['login'])) {
         <form action="" method="POST">
 
             <div class="input-group">
-                <label>Email</label>
-                <input type="email" name="email" required>
+                <label><i class="fas fa-envelope" style="margin-right: 6px; color: var(--gold);"></i>Email</label>
+                <input type="email" name="email" placeholder="your@email.com" required>
             </div>
 
             <div class="input-group">
-                <label>Password</label>
-                <input type="password" name="password" required>
+                <label><i class="fas fa-lock" style="margin-right: 6px; color: var(--gold);"></i>Password</label>
+                <input type="password" name="password" placeholder="••••••••" required>
             </div>
 
             <button type="submit" class="btn-auth" name="login">
-                Login
+                <i class="fas fa-sign-in-alt"></i> Login
             </button>
 
         </form>
@@ -93,6 +98,25 @@ if (isset($_POST['login'])) {
     </div>
 
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<?php if(isset($_SESSION['error'])) : ?>
+
+<script>
+Swal.fire({
+    toast: true,
+    position: 'top-end',
+    icon: 'error',
+    title: '<?= $_SESSION['error']; ?>',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true
+});
+</script>
+
+<?php unset($_SESSION['error']); ?>
+<?php endif; ?>
 
 </body>
 </html>

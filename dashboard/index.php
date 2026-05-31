@@ -50,11 +50,38 @@ if (!isset($_SESSION['id_user'])) {
 
 </div>
 
+
 <?php include"partials/modal_tambah.php"; ?>
 
-    <script src="../assets/js/modal.js"></script>
-    <script src="../assets/js/sidebar.js"></script>
-    <script src="../assets/js/navbar.js"></script>
+<script src="../assets/js/modal.js"></script>
+<script src="../assets/js/sidebar.js"></script>
+<script src="../assets/js/navbar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<?php if(isset($_SESSION['success'])) : ?>
+<script>
+Swal.fire({
+    icon: 'success',
+    title: 'Berhasil',
+    text: '<?= $_SESSION['success']; ?>',
+    confirmButtonColor: '#d4af37'
+});
+</script>
+<?php unset($_SESSION['success']); ?>
+<?php endif; ?>
+
+
+<?php if(isset($_SESSION['error'])) : ?>
+<script>
+Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: '<?= $_SESSION['error']; ?>',
+    confirmButtonColor: '#d4af37'
+});
+</script>
+<?php unset($_SESSION['error']); ?>
+<?php endif; ?>
 
 </body>
 </html>
