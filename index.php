@@ -63,13 +63,6 @@
             </div>
 
             <div class="feature-grid">
-               <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-credit-card"></i>
-                    </div>
-                    <h3>Expense Tracking</h3>
-                    <p>Track your expenses and manage your budget effectively with real-time updates.</p>
-                </div>
 
                 <div class="feature-item">
                     <div class="feature-icon">

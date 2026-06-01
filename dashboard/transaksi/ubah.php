@@ -20,20 +20,16 @@ if(isset($_POST['ubah_transaksi'])){
 
     if(ubah($_POST) > 0){
 
-        echo "
-        <script>
-            alert('Transaction updated successfully!');
-            document.location.href = 'index.php';
-        </script>
-        ";
+        $_SESSION['success'] =
+        "Transaction updated successfully!";
 
-    } else {
+        header("Location: index.php");
+        exit;
 
-        echo "
-        <script>
-            alert('Failed to update transaction!');
-        </script>
-        ";
+    }else{
+
+        $_SESSION['error'] = "Failed to update transaction!";
+
     }
 }
 ?>
@@ -237,6 +233,21 @@ function setJenis(jenis, btn){
     btn.classList.add("active");
 }
 
+</script>
+
+<script>
+const alertBox = document.querySelector('.alert');
+
+if(alertBox){
+    setTimeout(() => {
+        alertBox.style.opacity = "0";
+        alertBox.style.transform = "translateY(-10px)";
+
+        setTimeout(() => {
+            alertBox.remove();
+        },300);
+    },3000);
+}
 </script>
 
 </body>

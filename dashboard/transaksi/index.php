@@ -67,10 +67,40 @@ $jumlah_data = mysqli_num_rows($query_transaksi);
     </main>
 
 <?php include "../partials/modal_tambah.php"; ?>
+<?php include "../partials/modal_confirm.php"; ?>
  
 </div>
 <script src="../../assets/js/modal.js"></script>
 <script src="../../assets/js/sidebar.js"></script>
 <script src="../../assets/js/navbar.js"></script>
+<script src="../../assets/js/confirm.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<?php if(isset($_SESSION['success'])) : ?>
+<script>
+Swal.fire({
+    icon: 'success',
+    title: 'Success',
+    text: '<?= $_SESSION['success']; ?>',
+    confirmButtonColor: '#c9a227'
+});
+</script>
+<?php unset($_SESSION['success']); ?>
+
+<?php endif; ?>
+
+<?php if(isset($_SESSION['error'])) : ?>
+<script>
+Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: '<?= $_SESSION['error']; ?>',
+    confirmButtonColor: '#c9a227'
+});
+</script>
+<?php unset($_SESSION['error']); ?>
+<?php endif; ?>
+
 </body>
 </html>

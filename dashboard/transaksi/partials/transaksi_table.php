@@ -44,7 +44,6 @@ $jumlahHalaman = ceil($jumlahdata / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET['halaman'])) ? (int)$_GET['halaman'] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-// ketika ingin membuka filter seperti this month dan lainnya, buat agar pagination nya sesuai dengan filter yang dipilih.
 
 
 
@@ -63,29 +62,11 @@ if (isset($_GET['custom_date'])) $url_params .= "&custom_date=" . urlencode($_GE
 
 ?>
 <div class="transaction-table-container">
-    <!-- tombol halaman -->
-     <?php if($halamanAktif > 1) : ?>
-        <a href="?halaman=<?= $halamanAktif - 1;  ?><?= $url_params; ?>">&laquo;</a>
-        <?php endif; ?>
-        
-
-        <?php for( $i = 1; $i <= $jumlahHalaman; $i++ ) : ?>
-            <?php if( $i == $halamanAktif) : ?>
-                <a href="?halaman=<?= $i; ?><?= $url_params; ?>" style="font-weight: bold; color: yellow;"><?= $i; ?></a>
-            <?php else : ?>
-                <a href="?halaman=<?= $i; ?><?= $url_params; ?>"><?= $i; ?></a>
-            <?php endif; ?>
-            
-        <?php endfor; ?>
-
-        <?php if ($halamanAktif < $jumlahHalaman) : ?>
-        <a href="?halaman=<?= $halamanAktif + 1;  ?><?= $url_params; ?>">&raquo;</a>
-        <?php endif; ?>
-
+    
     <table class="transaction-table">
-
+        
         <thead>
-
+            
             <tr>                
                 <th>Date</th>
                 <th>Description</th>
@@ -94,30 +75,118 @@ if (isset($_GET['custom_date'])) $url_params .= "&custom_date=" . urlencode($_GE
                 <th>Amount</th>  
                 <th>Actions</th>              
             </tr>
-
+            
         </thead>
-
+        
         <tbody>        
-        <?php foreach($transaksi as $row): ?>
-        <tr>                        
-            <td><?= $row["tanggal"];?></td>
-            <td><?= $row["catatan"]; ?></td>
-            <td><?= $row["kategori"]; ?></td>
-            <td><?= $row["jenis_transaksi"]; ?></td>
-            <td><?= $row["nominal"]; ?></td>
-            <td>
-                <a href="ubah.php?id=<?= $row["id_transaksi"]; ?>" class ="edit-btn" onclick=
-                "return confirm('anda yakin ingin mengubah data?');" >ubah</a> |
-                <a href="hapus.php?id=<?= $row["id_transaksi"]; ?>" onclick=
-                "return confirm('anda yakin ingin menghapus?');">hapus</a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
+            <?php foreach($transaksi as $row): ?>
+                <tr>                        
+                    <td><?= $row["tanggal"];?></td>
+                    <td><?= $row["catatan"]; ?></td>
+                    <td><?= $row["kategori"]; ?></td>
+                    <td><?= $row["jenis_transaksi"]; ?></td>
+                    <td><?= $row["nominal"]; ?></td>
+                    <td>
+                        <a href="ubah.php?id=<?= $row['id_transaksi']; ?>"
+                            class="edit-btn open-edit-confirm">
+                                Ubah
+                        </a>
+                        |
+                        <a href="hapus.php?id=<?= $row['id_transaksi']; ?>"
+                            class="delete-btn open-delete-confirm">
+                                Hapus
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
 
+                <?php
+                $jumlahBarisKosong = $jumlahDataPerHalaman - count($transaksi);
+
+                    for($i = 0; $i < $jumlahBarisKosong; $i++):
+                ?>
+                <tr class="empty-row">
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <?php endfor; ?>
+                
             </tr>
-
+            
         </tbody>
-
+        
     </table>
+    
+    <div class="pagination">
 
+    <?php if($halamanAktif > 1): ?>
+        <a class="page-btn"
+           href="?halaman=<?= $halamanAktif - 1 ?><?= $url_params ?>">
+            &laquo;
+        </a>
+
+      <?php else: ?>
+
+        <span class="page-btn disabled">
+            &laquo;
+        </span>  
+    <?php endif; ?>
+
+    <?php
+        $start = max(1, $halamanAktif - 2);
+        $end = min($jumlahHalaman, $halamanAktif + 2);
+    ?>
+
+    <?php if($start > 1): ?>
+        <a class="page-btn"
+           href="?halaman=1<?= $url_params ?>">
+            1
+        </a>
+
+        <?php if($start > 2): ?>
+            <span class="dots">...</span>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php for($i = $start; $i <= $end; $i++): ?>
+
+        <a
+            href="?halaman=<?= $i ?><?= $url_params ?>"
+            class="page-btn <?= ($i == $halamanAktif) ? 'active' : '' ?>">
+            <?= $i ?>
+        </a>
+
+    <?php endfor; ?>
+
+    <?php if($end < $jumlahHalaman): ?>
+
+        <?php if($end < $jumlahHalaman - 1): ?>
+            <span class="dots">...</span>
+        <?php endif; ?>
+
+        <a class="page-btn"
+           href="?halaman=<?= $jumlahHalaman ?><?= $url_params ?>">
+            <?= $jumlahHalaman ?>
+        </a>
+
+    <?php endif; ?>
+
+    <?php if($halamanAktif < $jumlahHalaman): ?>
+        <a class="page-btn"
+           href="?halaman=<?= $halamanAktif + 1 ?><?= $url_params ?>">
+            &raquo;
+        </a>
+
+      <?php else: ?>
+
+        <span class="page-btn disabled">
+        &raquo;
+        </span>
+    <?php endif; ?>
+
+    </div>
 </div>

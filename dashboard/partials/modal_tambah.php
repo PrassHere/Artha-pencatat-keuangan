@@ -1,23 +1,3 @@
-<?php
-if (!isset($_SESSION['id_user'])) {
-    header("Location: ../../auth/login.php");
-    exit;
-}
-if (isset($_POST['tambah_transaksi'])) {
-    
-    if (tambah($_POST) > 0) {
-        echo "
-        <script>
-            alert('Transaksi berhasil ditambahkan!');
-            document.location.href = 'index.php'; 
-        </script>
-        ";
-    } else {
-        echo "<script>alert('Gagal menambahkan transaksi!');</script>";
-    }
-}
-
-?>
 <div class="modal-overlay" id="transactionModal">
 
     <div class="modal-box">
@@ -34,10 +14,16 @@ if (isset($_POST['tambah_transaksi'])) {
         </div>
 
         <!-- FORM -->
-        <form class="transaction-form" method="post" action="">
+        <form class="transaction-form" method="post" action="/coding%20php/Artha/dashboard/transaksi/tambah.php">
 
         <!-- untuk input jenis -->
-        <input type="hidden" name="jenis" id="input_jenis" value="expense">
+            <input type="hidden" name="jenis" id="input_jenis" value="expense">
+
+            <input
+                type="hidden"
+                name="redirect"
+                value="<?= $_SERVER['REQUEST_URI']; ?>"
+            >
             <!-- TYPE -->
             <div class="form-group">
 
